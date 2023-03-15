@@ -1,0 +1,55 @@
+export const theme = {
+  colors: {
+    white: '#fff',
+    black: '#000',
+    inputColor: '#808080',
+    searchIcon: '#757575',
+    charName: '#212121',
+    charSpecies: '#666666',
+    charTitle: '#081F32',
+    charSubtitle: '#8E8E93',
+    charValue: '#6E798C',
+    backdrop: '#3a5b34',
+    charBackdrop: '#1c3f15ed',
+    imgBorder: '#F2F2F7',
+    infoBorder: '#ededed',
+    iconColor: '#dbffcb',
+    signInBtn: '#00b0c89e',
+    error: '#D50000',
+    transparent: 'transparent',
+  },
+  space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
+  fonts: {
+    body: 'Roboto',
+    backBtn: 'Karla',
+  },
+  fontSizes: ['14px', '16px', '18px', '20px', '32px', '48px'],
+  fontWeights: {
+    normal: 400,
+    medium: 500,
+    bold: 700,
+  },
+  lineHeights: {
+    body: 1.5,
+    title: 1.2,
+  },
+  letterSpacing: {
+    title: '0.15px',
+    text: '0.25px',
+  },
+  borders: {
+    none: 'none',
+    normal: '1px solid',
+    bold: '5px solid',
+  },
+  radii: {
+    none: '0',
+    card: '4px',
+    input: '8px',
+    circular: '50%',
+  },
+  transition: {
+    main: '400ms ease',
+  },
+  breakpoints: ['360px', '480px', '768px', '1200px'],
+};
