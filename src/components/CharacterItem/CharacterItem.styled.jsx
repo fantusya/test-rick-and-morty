@@ -9,6 +9,13 @@ export const CharacterImg = styled.img`
   display: block;
   max-width: 100%;
   object-fit: cover;
+  width: 312px;
+  height: 232px;
+
+  @media (min-width: ${p => p.theme.breakpoints[2]}) {
+    width: 240px;
+    height: 168px;
+  }
 `;
 
 export const InfoContainer = styled.div`

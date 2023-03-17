@@ -33,6 +33,12 @@ export const TapText = styled.p`
 
 export const CharacterCard = styled.li`
   width: 312px;
+  @media (min-width: 768px) {
+    width: 300px;
+  }
+  @media (min-width: 1440px) {
+    width: 240px;
+  }
   position: relative;
   overflow: hidden;
 
