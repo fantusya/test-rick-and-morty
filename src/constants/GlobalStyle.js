@@ -32,13 +32,14 @@ export const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  @media (min-width: 768px) {
-    padding-left: 64px;
-    padding-right: 64px;
+  @media (min-width: ${p => p.theme.breakpoints[1]}) {
+    padding-left: ${p => p.theme.space[6]}px;
+    padding-right: ${p => p.theme.space[6]}px;
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: ${p => p.theme.breakpoints[2]}) {
     padding-left: 210px;
     padding-right: 210px;
+    width: 1440px;
   }
 `;

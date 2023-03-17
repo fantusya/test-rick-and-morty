@@ -51,5 +51,5 @@ export const theme = {
   transition: {
     main: '400ms ease',
   },
-  breakpoints: ['360px', '480px', '768px', '1200px'],
+  breakpoints: ['360px', '768px', '1440px'],
 };
