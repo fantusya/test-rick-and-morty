@@ -37,6 +37,7 @@ export default function useCharactersSearch(query, page) {
           return;
         }
         setStatus(Status.REJECTED);
+        return;
       });
 
     return () => cancel();
