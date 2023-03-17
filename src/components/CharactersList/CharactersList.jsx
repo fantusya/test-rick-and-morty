@@ -19,9 +19,9 @@ const CharacterList = ({ charactersArray, refValue }) => {
     <Box
       as="ul"
       display="flex"
-      flexDirection="column"
-      alignItems="center"
-      gridGap={5}
+      flexWrap="wrap"
+      justifyContent="center"
+      gridGap={[5, null, null, '20px']}
     >
       {charactersArray.map((character, index) => {
         if (charactersArray.length === index + 1) {

@@ -8,6 +8,7 @@ import {
   BackBtn,
   CharacterImg,
   CharacterTitle,
+  InfoBlock,
   InfoTitle,
   InfoList,
   InfoItem,
@@ -46,18 +47,19 @@ const CharacterPage = () => {
 
   return (
     <main>
-      <Container>
-        <BackBtn to={backLinkHref}>
-          <ArrowBack />
-          <span>GO BACK</span>
-        </BackBtn>
-      </Container>
-
-      <Box as="section" pt="72px" pb="85px">
+      <BackBtn to={backLinkHref}>
+        <ArrowBack />
+        <span>GO BACK</span>
+      </BackBtn>
+      <Box
+        as="section"
+        pt={['72px', null, null, '32px']}
+        pb={['85px', null, null, '142px']}
+      >
         <Container>
           <CharacterImg src={character.image} alt={character.name} />
           <CharacterTitle>{character.name}</CharacterTitle>
-          <div>
+          <InfoBlock>
             <InfoTitle>Informations</InfoTitle>
             <InfoList>
               <InfoItem>
@@ -83,7 +85,7 @@ const CharacterPage = () => {
                 <InfoItemValue>{character.type || 'Unknown'}</InfoItemValue>
               </InfoItem>
             </InfoList>
-          </div>
+          </InfoBlock>
         </Container>
       </Box>
     </main>

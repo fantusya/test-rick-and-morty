@@ -1,18 +1,22 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { Box } from 'components/Box/Box';
 import { Status } from 'constants/status';
 import { Container } from 'constants/GlobalStyle';
 import SearchBar from 'components/SearchBar';
-import rick from 'images/logo/logo_sm.png';
-import { LogoImg } from './Home.styled';
+import logo_312 from 'images/logo/logo_312.png';
+import logo_624 from 'images/logo/logo_624.png';
+import logo_600 from 'images/logo/logo_600.png';
+import logo_1200 from 'images/logo/logo_1200.png';
+import { LogoImg, Error } from './Home.styled';
 import useCharactersSearch from 'hooks/useCharactersSearch';
 import CharacterList from 'components/CharactersList';
 import axios from 'axios';
 import useSignIn from 'hooks/useSignIn';
-import * as jose from 'jose';
 import SignIn from 'components/SignIn';
+import error from 'images/error.png';
+import { BallTriangle } from 'react-loader-spinner';
 
 const Home = () => {
   const [user, setUser] = useState(null);
@@ -32,7 +36,7 @@ const Home = () => {
   const observer = useRef();
   const lastCharacterRef = useCallback(
     node => {
-      if (status === Status.PENDING) {
+      if (status === Status.PENDING || status === Status.REJECTED) {
         return;
       }
 
@@ -42,7 +46,7 @@ const Home = () => {
 
       observer.current = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting && hasMore) {
-          console.log('visible');
+          // console.log('visible');
           setPage(prevState => prevState + 1);
         }
       });
@@ -53,8 +57,6 @@ const Home = () => {
     },
     [hasMore, status]
   );
-
-  // const { login, logOut, user, profile } = useSignIn;
 
   useEffect(() => {
     if (user || localStorage.getItem('user')) {
@@ -97,52 +99,13 @@ const Home = () => {
     localStorage.removeItem('user');
   };
 
-  // useEffect(() => {
-  //   // (async () => {
-  //   //   setTrendingMovies(await fetchTrendingMovies());
-  //   // })();
-  //   async function getCharacters() {
-  //     setStatus(Status.PENDING);
-
-  //     try {
-  //       if (page === 0) {
-  //         setPage(1);
-  //         return;
-  //       }
-  //       const { info, results } = await fetchCharacters(page);
-  //       console.log(info);
-  //       setCharacters(prevState => [...prevState, ...results]);
-  //       setTotal(info.count);
-  //       setStatus(Status.RESOLVED);
-  //     } catch (error) {
-  //       setStatus(Status.REJECTED);
-  //     }
-  //   }
-
-  //   getCharacters();
-  // }, [page]);
-
   const handleChange = queryChar => {
     setSearchParams(queryChar !== '' ? { name: queryChar } : {});
     setPage(1);
   };
 
-  // const responseMessage = response => {
-  //   console.log('response', response);
-  //   const protectedHeader = jose.decodeJwt(response.credential);
-  //   console.log('protectedHeader', protectedHeader);
-  //   setUser(protectedHeader);
-  //   localStorage.setItem('user', JSON.stringify(protectedHeader));
-  // };
-
-  // const errorMessage = error => {
-  //   console.log(error);
-  // };
-
   return (
     <>
-      {/* {status === 'pending' && <Pending />} */}
-      {/* {status === 'rejected' && <Error />} */}
       <Box as="header" pt={4}>
         <Container>
           <Box
@@ -151,25 +114,31 @@ const Home = () => {
             alignItems="flex-start"
             gridGap={5}
           >
-            {/* <GoogleLogin
-              onSuccess={responseMessage}
-              onError={errorMessage}
-              type="standart"
-              shape="circle"
-            /> */}
             <SignIn profile={profile} login={() => login()} logOut={logOut} />
-            <LogoImg src={rick} alt="logo" />
+            <LogoImg>
+              <source
+                media="(min-width: 1440px)"
+                srcSet={`${logo_600} 1x, ${logo_1200} 2x`}
+                type="image/png"
+              />
+              <source
+                media="(max-width: 1439px)"
+                srcSet={`${logo_312} 1x, ${logo_624} 2x`}
+                type="image/png"
+              />
+              <img src={logo_312} alt="logo" loading="lazy" />
+            </LogoImg>
           </Box>
         </Container>
       </Box>
 
-      <Box as="section" pt={5}>
+      <Box as="section" py={5}>
         <Container>
           <SearchBar onChange={handleChange} />
         </Container>
       </Box>
 
-      <Box as="section" pt={5} pb={5}>
+      <Box as="section" pb={4}>
         <Container>
           <CharacterList
             refValue={lastCharacterRef}
@@ -177,6 +146,16 @@ const Home = () => {
           />
         </Container>
       </Box>
+
+      {status === Status.PENDING && (
+        <Box display="flex" justifyContent="center">
+          <BallTriangle />
+        </Box>
+      )}
+
+      {status === Status.REJECTED && (
+        <Error src={error} alt="error" width="300px" />
+      )}
     </>
   );
 };

@@ -19,8 +19,8 @@ const CharacterItem = ({ character: { species, image, name } }) => {
         <CharacterImg
           src={imagePath}
           alt={name}
-          width="312px"
-          height="232px"
+          // width="312px"
+          // height="232px"
           loading="lazy"
         />
       </ImgContainer>

@@ -14,7 +14,7 @@ const SignIn = ({ profile, login, logOut }) => {
       {profile ? (
         <UserContainer>
           <UserImg src={profile.picture} alt="user" />
-          <UserGreeting>Hi, {profile.name}!</UserGreeting>
+          <UserGreeting>Hi, {profile.given_name}!</UserGreeting>
           <UserBtn onClick={logOut}>
             <AiOutlineGoogle color="#808080" size={20} />
             <span>Log out</span>
